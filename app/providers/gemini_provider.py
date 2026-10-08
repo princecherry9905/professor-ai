@@ -5,6 +5,7 @@ This is the ONLY file in the app that imports the google-genai SDK.
 
 import asyncio
 import logging
+from typing import Optional
 
 import httpx
 from google import genai
@@ -35,7 +36,7 @@ class GeminiProvider(LLMProvider):
 
     def __init__(self, settings: Settings) -> None:
         self._settings = settings
-        self._client: genai.Client | None = None
+        self._client: Optional[genai.Client] = None
         if settings.has_api_key:
             timeout_ms = int(settings.request_timeout_seconds * 1000)
             self._client = genai.Client(

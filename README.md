@@ -113,7 +113,7 @@ GEMINI_API_KEY=AIza...your-key...
 
 ## 8. Installation
 
-Requires **Python 3.10+**.
+Requires **Python 3.9+** (macOS system Python 3.9 works).
 
 ```bash
 cd professor-ai

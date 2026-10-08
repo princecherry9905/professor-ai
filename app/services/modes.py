@@ -1,7 +1,7 @@
 """Response modes. Each mode is one ModeSpec — adding a mode means adding one entry."""
 
 from dataclasses import dataclass
-from typing import Any, Literal
+from typing import Any, Dict, Literal, Optional
 
 from app.models.schemas import ChatMode, JsonAnswer
 
@@ -16,7 +16,7 @@ class ModeSpec:
     temperature: float
     max_output_tokens: int
     output_format: OutputFormat
-    json_schema: dict[str, Any] | None = None
+    json_schema: Optional[Dict[str, Any]] = None
 
 
 def schema_for_model(model: type) -> dict[str, Any]:

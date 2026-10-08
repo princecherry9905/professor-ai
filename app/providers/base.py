@@ -5,7 +5,7 @@ The rest of the app only knows about these types, never about a vendor SDK.
 
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
-from typing import Any, Literal
+from typing import Any, Dict, Literal, Optional
 
 Role = Literal["student", "professor"]
 
@@ -20,7 +20,7 @@ class Message:
 class GenerationConfig:
     temperature: float = 0.6
     max_output_tokens: int = 2048
-    json_schema: dict[str, Any] | None = None  # set => ask the model for JSON output
+    json_schema: Optional[Dict[str, Any]] = None  # set => ask the model for JSON output
     extra: dict[str, Any] = field(default_factory=dict)
 
 

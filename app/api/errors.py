@@ -4,6 +4,7 @@ Details are logged on the server; the browser never sees stack traces or secrets
 """
 
 import logging
+from typing import Optional
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
@@ -39,7 +40,7 @@ _ERROR_TABLE: list[tuple[type[Exception], int, str, str]] = [
 ]
 
 
-def error_body(code: str, message: str, details: list | None = None) -> dict:
+def error_body(code: str, message: str, details: Optional[list] = None) -> dict:
     error: dict = {"code": code, "message": message}
     if details:
         error["details"] = details

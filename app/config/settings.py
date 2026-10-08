@@ -1,6 +1,7 @@
 """Application settings, loaded from environment variables / .env."""
 
 from functools import lru_cache
+from typing import Optional
 
 from pydantic import SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -9,7 +10,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
-    gemini_api_key: SecretStr | None = None
+    gemini_api_key: Optional[SecretStr] = None
     gemini_model: str = "gemini-3.8-flash"
     ai_provider: str = "gemini"
 

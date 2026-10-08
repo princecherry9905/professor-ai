@@ -2,7 +2,7 @@
 
 import json
 import re
-from typing import TypeVar
+from typing import Optional, TypeVar
 
 from pydantic import BaseModel, ValidationError
 
@@ -61,7 +61,7 @@ def parse_json_model(raw: str, model: type[M]) -> M:
         raise InvalidAIResponse(f"JSON did not match schema: {exc.error_count()} error(s)") from exc
 
 
-def _loads_object(text: str) -> dict | None:
+def _loads_object(text: str) -> Optional[dict]:
     try:
         data = json.loads(text)
     except json.JSONDecodeError:

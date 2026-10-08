@@ -1,6 +1,7 @@
 """Shared test fixtures. A FakeProvider replaces Gemini — no API key or network needed."""
 
 import os
+from typing import Optional
 
 # Make sure a developer's real .env never leaks into the tests.
 os.environ["GEMINI_API_KEY"] = ""
@@ -18,7 +19,7 @@ class FakeProvider(LLMProvider):
 
     name = "fake"
 
-    def __init__(self, replies: list | None = None, configured: bool = True) -> None:
+    def __init__(self, replies: Optional[list] = None, configured: bool = True) -> None:
         self.replies = list(replies or [])
         self.calls: list[dict] = []
         self._configured = configured

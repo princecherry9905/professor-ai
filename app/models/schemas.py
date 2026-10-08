@@ -1,7 +1,7 @@
 """Request/response contracts for the API, plus the structured answers we ask the AI for."""
 
 from enum import Enum
-from typing import Literal
+from typing import Literal, Optional, Union
 
 from pydantic import BaseModel, Field, field_validator
 
@@ -86,7 +86,7 @@ class JsonAnswer(BaseModel):
 
 
 class ChatResponse(BaseModel):
-    answer: str | JsonAnswer
+    answer: Union[str, JsonAnswer]
     mode: ChatMode
     subject: str
     format: Literal["markdown", "text", "json"]
@@ -97,7 +97,7 @@ class ChatResponse(BaseModel):
 class QuizQuestionRequest(BaseModel):
     subject: str = "general"
     difficulty: Difficulty = "medium"
-    topic: str | None = Field(default=None, max_length=200)
+    topic: Optional[str] = Field(default=None, max_length=200)
     asked: list[str] = Field(default_factory=list, max_length=50)
 
     @field_validator("subject")

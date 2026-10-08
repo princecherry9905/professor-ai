@@ -5,7 +5,7 @@ This file knows nothing about Gemini; it only talks to the LLMProvider interface
 
 import logging
 import uuid
-from typing import TypeVar
+from typing import TypeVar, Union
 
 from pydantic import BaseModel
 
@@ -66,7 +66,7 @@ class TutorService:
         )
 
         if spec.output_format == "json":
-            answer: str | JsonAnswer = await self._generate_json(system, messages, config, JsonAnswer)
+            answer: Union[str, JsonAnswer] = await self._generate_json(system, messages, config, JsonAnswer)
             response_format = "json"
         else:
             raw = await self._provider.generate(system, messages, config)
